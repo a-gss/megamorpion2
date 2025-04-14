@@ -11,6 +11,11 @@ Then you can compile megamporpion2 (which btw is a single translation unit) and 
 ./build.sh
 ```
 
+If you are on WSL, you must have `Berkeley DB` installed on your system:
+```
+sudo apt-get install libdb-dev
+```
+
 ## Extended rules
 There are no offical rules, so I just made some up because I find them fun:
 
