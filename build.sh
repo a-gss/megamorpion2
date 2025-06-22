@@ -7,7 +7,7 @@ LIBS="$(pwd)/ncurses/lib -lncursesw -ltinfow -lm"
 LIBS_DEBUG="$(pwd)/ncurses/lib -lncursesw_g -ltinfow_g -lm"
 
 # Compilation flags
-WARNINGS="-Wall -Wextra -Wpedantic"
+WARNINGS="-Wall -Wextra -Wpedantic -Wno-macro-redefined -Wno-unused-but-set-variable"
 CFLAGS="-DNCURSES_WIDECHAR"
 INCLUDE_DIR="-I$(pwd)/ncurses/include/ncursesw -I$(pwd)/ncurses/include"
 
@@ -28,14 +28,16 @@ fi
 for arg in "$@"; do
     case $arg in
         -r|--release)
+            O="-O2"
             WARNINGS+=" -Werror"
             STRIP_BINARY=true
             ;;
         -d|--debug)
+            O="-O0"
             DEBUG="-g"
             LIBS=$LIBS_DEBUG
             ;;
-        *) 
+        *)
             echo "Unknown option: $arg"
             exit 1
             ;;
@@ -46,7 +48,7 @@ in='all.c'
 out='all'
 
 # Final command
-$cc $WARNINGS $CFLAGS $INCLUDE_DIR $DEBUG $in $LINKER_FLAGS -L$LIBS -o $out
+$cc $O $WARNINGS $CFLAGS $INCLUDE_DIR $DEBUG $in $LINKER_FLAGS -L$LIBS -o $out
 
 if [ "$STRIP_BINARY" = true ]; then
     strip $out

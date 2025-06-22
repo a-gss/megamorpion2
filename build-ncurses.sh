@@ -9,17 +9,18 @@ mkdir ncurses
 cd ncurses-${VER}
 ./configure --prefix=${PWD}/../ncurses \
   --enable-static \
+  --enable-widec \
+  --disable-db-install \
+  --disable-shared \
   --with-normal \
   --with-debug \
+  --with-termlib \
+  --with-terminfo-dirs=/usr/share/terminfo:/usr/local/share/terminfo \
   --without-ada \
   --without-cxx --without-cxx-binding \
   --without-progs \
   --without-tests \
   --without-manpages \
-  --disable-db-install \
-  --with-termlib \
-  --disable-shared \
-  --enable-widec \
   --without-curses
 
 make -j$(nproc) && make install
@@ -27,4 +28,8 @@ cd ..
 rm -rf ncurses-${VER}
 rm -rf ncurses/bin
 echo ---------------------------------------------------------------------------
-echo ncurses-${VER} successfully installed in ${PWD}/ncurses !
+echo ncurses-${VER} successfully compiled in ${PWD}/ncurses !
+
+# For Windows:
+# prebuilt binaries in <https://invisible-mirror.net/archives/ncurses/win32/?C=M;O=D>
+# "win32/mingw64.zip"
