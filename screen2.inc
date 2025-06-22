@@ -22,6 +22,10 @@
 
     // wait any key is pressed
     do {
+        // erase shit
+        move(LINES/2, 0);
+        clrtoeol();
+
         // print cool message
         int coolmsglen = strlen(p1_name) + strlen(p2_name) + 4; // +4 is " VS "
         move(LINES/2, (COLS - coolmsglen)/2);

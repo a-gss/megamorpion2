@@ -33,7 +33,7 @@ void editText(char *buf, int len, int y, int x)
         }
 
         // Draw
-        for (int i = 0; i <= charCount; i++) {
+        for (unsigned int i = 0; i <= charCount; i++) {
             mvprintw(y, x+i, "%c ", buf[i]);
         }
         if (pos == charCount) {
